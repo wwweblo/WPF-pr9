@@ -32,5 +32,7 @@ namespace WpfApp3
             SaveClicked?.Invoke(this, EventArgs.Empty);
             Close();
         }
+
+        
     }
 }

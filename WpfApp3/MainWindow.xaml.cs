@@ -91,11 +91,19 @@ namespace WpfApp3
             {
                 window1.NameTextBox.Text = employee.name;
                 window1.EmailTextBox.Text = employee.email;
+                window1.ageTextBox.Text = Convert.ToString(employee.age);
+                window1.LoginTextBox.Text = employee.login;
+                window1.PasswordTextBox.Text = employee.password;
+
 
                 // Set the selected item in ComboBox by matching the content
                 ComboBoxItem selectedItem = window1.ProfessionComboBox.Items.OfType<ComboBoxItem>()
                                                   .FirstOrDefault(item => item.Content.ToString() == employee.role);
                 window1.ProfessionComboBox.SelectedItem = selectedItem;
+
+                ComboBoxItem selectedItem2 = window1.StatusComboBox.Items.OfType<ComboBoxItem>()
+                                                  .FirstOrDefault(item => item.Content.ToString() == employee.status);
+                window1.StatusComboBox.SelectedItem = selectedItem2;
             }
 
             window1.SaveClicked += (s, args) =>
@@ -107,8 +115,14 @@ namespace WpfApp3
                     employee.name = window1.NameTextBox.Text;
                     employee.email = window1.EmailTextBox.Text;
 
-                    // Access the content of the selected ComboBoxItem
                     employee.role = (window1.ProfessionComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
+                    employee.age = Convert.ToInt32(window1.ageTextBox.Text);
+
+                    employee.status = (window1.StatusComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
+                    employee.login = window1.LoginTextBox.Text;
+                    employee.password = window1.PasswordTextBox.Text;
 
                     dbContext.SaveChanges();
                 }
@@ -121,7 +135,14 @@ namespace WpfApp3
                         email = window1.EmailTextBox.Text,
 
                         // Access the content of the selected ComboBoxItem
-                        role = (window1.ProfessionComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString()
+                        role = (window1.ProfessionComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString(),
+
+                        age = Convert.ToInt16(window1.ageTextBox.Text),
+
+                        status = (window1.StatusComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString(),
+
+                        login = window1.LoginTextBox.Text,
+                        password = window1.PasswordTextBox.Text,
                     };
 
                     dbContext.Employee.Add(newEmployee);

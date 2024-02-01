@@ -22,5 +22,17 @@ namespace WpfApp3
         [Required]
         [StringLength(50)]
         public string email { get; set; }
+
+        public int age { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string status { get; set; }
+
+        [StringLength(50)]
+        public string login { get; set; }
+
+        [StringLength(50)]
+        public string password { get; set; }
     }
 }
