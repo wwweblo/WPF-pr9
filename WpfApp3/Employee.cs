@@ -11,16 +11,31 @@ namespace WpfApp3
     {
         public int id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Role is required")]
         [StringLength(50)]
         public string role { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         [StringLength(50)]
         public string name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [StringLength(50)]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "Age is required")]
+        [Range(1,100)]
+        public int age { get; set; }
+
+        [Required(ErrorMessage = "Status is required")]
+        [StringLength(50)]
+        public string status { get; set; }
+
+        [StringLength(50, ErrorMessage = "Login should be at most 50 characters long")]
+        public string login { get; set; }
+
+        [StringLength(50, ErrorMessage = "Password should be at most 50 characters long")]
+        public string password { get; set; }
     }
 }

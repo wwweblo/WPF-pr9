@@ -7,16 +7,28 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid>
-        <Label Content="Должность" HorizontalAlignment="Left" Margin="54,59,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ProfessionComboBox" HorizontalAlignment="Left" Margin="136,63,0,0" VerticalAlignment="Top" Width="120">
+        <Label Content="Должность" HorizontalAlignment="Left" Margin="42,73,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ProfessionComboBox" HorizontalAlignment="Left" Margin="142,73,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem>Врач</ComboBoxItem>
             <ComboBoxItem>Слесарь</ComboBoxItem>
             <ComboBoxItem>Повар</ComboBoxItem>
         </ComboBox>
-        <Label Content="Имя" HorizontalAlignment="Left" Margin="54,101,0,0" VerticalAlignment="Top"/>
+        <Label Content="Имя" HorizontalAlignment="Left" Margin="69,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.136,1.003"/>
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="142,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="почта" HorizontalAlignment="Left" Margin="54,144,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="142,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="сохранить" HorizontalAlignment="Left" Margin="90,197,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
+        <Label Content="почта" HorizontalAlignment="Left" Margin="61,135,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Margin="142,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="сохранить" HorizontalAlignment="Left" Margin="90,330,0,0" VerticalAlignment="Top" Click="SaveButton_Click"/>
+        <Label Content="возраст" HorizontalAlignment="Left" Margin="54,167,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ageTextBox" HorizontalAlignment="Left" Margin="142,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="login" HorizontalAlignment="Left" Margin="67,230,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="142,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="статус" HorizontalAlignment="Left" Margin="64,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="StatusComboBox" HorizontalAlignment="Left" Margin="142,0,0,0" VerticalAlignment="Center" Width="120">
+            <ComboBoxItem Content="свободен"/>
+            <ComboBoxItem Content="в поиске"/>
+            <ComboBoxItem Content="в отношениях"/>
+        </ComboBox>
+        <Label Content="пароль" HorizontalAlignment="Left" Margin="55,256,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="142,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
     </Grid>
 </Window>

@@ -27,6 +27,18 @@ namespace WpfApp3
             modelBuilder.Entity<Employee>()
                 .Property(e => e.email)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.login)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.password)
+                .IsUnicode(false);
         }
     }
 }
