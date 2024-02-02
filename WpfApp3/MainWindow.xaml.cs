@@ -89,14 +89,13 @@ namespace WpfApp3
 
             if (employee != null)
             {
+                // Заполнение полей данными существующего сотрудника
                 window1.NameTextBox.Text = employee.name;
                 window1.EmailTextBox.Text = employee.email;
                 window1.ageTextBox.Text = Convert.ToString(employee.age);
                 window1.LoginTextBox.Text = employee.login;
                 window1.PasswordTextBox.Text = employee.password;
 
-
-                // Set the selected item in ComboBox by matching the content
                 ComboBoxItem selectedItem = window1.ProfessionComboBox.Items.OfType<ComboBoxItem>()
                                                   .FirstOrDefault(item => item.Content.ToString() == employee.role);
                 window1.ProfessionComboBox.SelectedItem = selectedItem;
@@ -108,19 +107,24 @@ namespace WpfApp3
 
             window1.SaveClicked += (s, args) =>
             {
-                // Handle the save logic here
+                // Обработка логики сохранения
+
+                // Проверка ввода данных
+                string validationError = ValidateEmployeeInput(window1);
+                if (!string.IsNullOrEmpty(validationError))
+                {
+                    MessageBox.Show(validationError, "Ошибка ввода данных", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 if (employee != null)
                 {
-                    // Update existing employee in the database
+                    // Обновление существующего сотрудника в базе данных
                     employee.name = window1.NameTextBox.Text;
                     employee.email = window1.EmailTextBox.Text;
-
                     employee.role = (window1.ProfessionComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
-
                     employee.age = Convert.ToInt32(window1.ageTextBox.Text);
-
                     employee.status = (window1.StatusComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
-
                     employee.login = window1.LoginTextBox.Text;
                     employee.password = window1.PasswordTextBox.Text;
 
@@ -128,19 +132,14 @@ namespace WpfApp3
                 }
                 else
                 {
-                    // Add new employee to the database
+                    // Добавление нового сотрудника в базу данных
                     Employee newEmployee = new Employee
                     {
                         name = window1.NameTextBox.Text,
                         email = window1.EmailTextBox.Text,
-
-                        // Access the content of the selected ComboBoxItem
                         role = (window1.ProfessionComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString(),
-
                         age = Convert.ToInt16(window1.ageTextBox.Text),
-
                         status = (window1.StatusComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString(),
-
                         login = window1.LoginTextBox.Text,
                         password = window1.PasswordTextBox.Text,
                     };
@@ -149,11 +148,51 @@ namespace WpfApp3
                     dbContext.SaveChanges();
                 }
 
-                // Refresh the ListView after saving
+                //Закрытие окна если проверка прошла успешно
+                window1.DialogResult = true;
+
+                // Обновление ListView после сохранения
                 DataContext = dbContext.Employee.ToList();
             };
 
             window1.ShowDialog();
         }
+
+        private string ValidateEmployeeInput(Window1 window1)
+        {
+            // Можно добавить пользовательские правила валидации здесь в соответствии с вашими требованиями
+            if (string.IsNullOrEmpty(window1.NameTextBox.Text))
+            {
+                return "Имя обязательно для заполнения.";
+            }
+
+            if (string.IsNullOrEmpty(window1.EmailTextBox.Text) || !IsValidEmail(window1.EmailTextBox.Text))
+            {
+                return "Недопустимый или пустой адрес электронной почты.";
+            }
+
+            if (string.IsNullOrEmpty(window1.ageTextBox.Text) || !int.TryParse(window1.ageTextBox.Text, out _))
+            {
+                return "Возраст должен быть числом.";
+            }
+
+            // Добавьте другие правила валидации при необходимости
+
+            return string.Empty;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
